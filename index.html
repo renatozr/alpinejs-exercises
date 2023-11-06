@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alpine.js Exercises</title>
+  <script defer src=https://cdn.jsdelivr.net/npm/alpinejs@3.13.2/dist/cdn.min.js></script>
+  <style>
+    * {
+      margin: 0;
+      border: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      background-color: #fff;
+      color: #000;
+      font-family: Verdana, sans-serif;
+    }
+
+    ol,
+    ul {
+      list-style: none;
+    }
+
+    a:hover {
+      color: #ffa500;
+      cursor: pointer;
+    }
+
+    a:active {
+      color: #dd9000;
+    }
+
+    nav ul {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      min-height: 10vh;
+    }
+
+    footer {
+      position: absolute;
+      right: 15px;
+      bottom: 15px;
+    }
+
+    .selected {
+      color: #ffa500;
+    }
+
+    /* SEARCH FILTER START */
+    .search-filter {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .search-filter * {
+      font-weight: 700;
+    }
+
+    .search-filter h1 {
+      margin: 8vh 0 5vh 0;
+    }
+
+    .search-filter input {
+      margin-bottom: 20px;
+      border-radius: 4px;
+      padding: 15px 25px;
+      background-color: #f8f8f8;
+    }
+
+    .search-filter input:hover {
+      cursor: pointer;
+    }
+
+    .search-filter ul {
+      max-height: 50vh;
+      overflow-y: scroll;
+    }
+
+    .search-filter li {
+      margin: 10px 20px;
+      border-radius: 4px;
+      padding: 15px 25px;
+      background-color: #000;
+      color: #fff;
+    }
+
+    /* COUNTER START */
+    .counter {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .counter * {
+      font-weight: 700;
+    }
+
+    .counter h1 {
+      margin: 8vh 0;
+    }
+
+    .counter button {
+      margin: 18px 5px;
+      border-radius: 4px;
+      padding: 15px 25px;
+      background-color: #000;
+      color: #fff;
+    }
+
+    .counter button:hover {
+      background-color: #222;
+      cursor: pointer;
+    }
+
+    .counter button:active {
+      background-color: #111;
+    }
+
+    .counter input:hover {
+      cursor: pointer;
+    }
+
+    .counter .power * {
+      vertical-align: middle;
+    }
+
+    /* SIGNUP START */
+    .signup {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .signup * {
+      font-weight: 700;
+    }
+
+    .signup h1 {
+      margin: 8vh 0 4vh 0;
+    }
+
+    .signup form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .signup label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .signup input {
+      width: 100%;
+      margin-bottom: 20px;
+      border-radius: 4px;
+      padding: 15px 25px;
+      background-color: #f8f8f8;
+    }
+
+    .signup .last-input {
+      width: auto;
+    }
+
+    .signup input:hover {
+      cursor: pointer;
+    }
+
+    .signup button {
+      margin: 18px 5px;
+      border-radius: 4px;
+      padding: 15px 25px;
+      background-color: #000;
+      color: #fff;
+    }
+
+    .signup div button {
+      margin: 0;
+    }
+
+    .signup button:hover {
+      background-color: #222;
+      cursor: pointer;
+    }
+
+    .signup button:active {
+      background-color: #111;
+    }
+
+    /* FETCH API START */
+    .fetch-api {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .fetch-api * {
+      font-weight: 700;
+    }
+
+    .fetch-api h1 {
+      margin: 8vh 0 4vh 0;
+    }
+
+    .fetch-api div,
+    .fetch-api img {
+      margin: 2vh 0;
+    }
+
+    .fetch-api img {
+      width: 400px;
+      border-radius: 4px;
+    }
+
+    .fetch-api button {
+      margin: 18px 5px;
+      border-radius: 4px;
+      padding: 15px 25px;
+      background-color: #000;
+      color: #fff;
+    }
+
+    .fetch-api button:hover {
+      background-color: #222;
+      cursor: pointer;
+    }
+
+    .fetch-api button:active {
+      background-color: #111;
+    }
+
+    /* TODO LIST START */
+    .todo-list {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .todo-list * {
+      font-weight: 700;
+    }
+
+    .todo-list h1 {
+      margin: 8vh 0 4vh 0;
+    }
+
+    .todo-list input:not([type=checkbox]) {
+      margin-bottom: 20px;
+      border-radius: 4px;
+      padding: 15px 25px;
+      background-color: #f8f8f8;
+    }
+
+    .todo-list input:hover {
+      cursor: pointer;
+    }
+
+    .todo-list input[type=checkbox] {
+      accent-color: #000;
+    }
+
+    .todo-list .done {
+      text-decoration: line-through;
+    }
+
+    .todo-list button {
+      margin: 18px 5px;
+      border-radius: 4px;
+      padding: 15px 25px;
+      background-color: #000;
+      color: #fff;
+    }
+
+    .todo-list button:hover {
+      background-color: #222;
+      cursor: pointer;
+    }
+
+    .todo-list button:active {
+      background-color: #111;
+    }
+
+    .todo-list ul {
+      min-width: 350px;
+      max-height: 50vh;
+      overflow-y: auto;
+    }
+
+    .todo-list li {
+      flex-grow: 1;
+      margin: 5px 0;
+      border-radius: 4px;
+      padding: 15px 25px;
+      background-color: #000;
+      color: #fff;
+    }
+
+    .todo-list .crud-wrapper {
+      display: flex;
+    }
+
+    .todo-list .crud-button {
+      margin: 5px 1px;
+      padding: 15px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="main" x-data="{ currentExercise: 'search-filter' }">
+    <nav>
+      <ul>
+        <li>
+          <a @click="currentExercise = 'search-filter'"
+            :class="currentExercise === 'search-filter' ? 'selected' : ''">Search Filter</a>
+        </li>
+        <li>
+          <a @click="currentExercise = 'counter'" :class="currentExercise === 'counter' ? 'selected' : ''">Counter</a>
+        </li>
+        <li>
+          <a @click="currentExercise = 'signup'" :class="currentExercise === 'signup' ? 'selected' : ''">Sign Up</a>
+        </li>
+        <li>
+          <a @click="currentExercise = 'fetch-api'" :class="currentExercise === 'fetch-api' ? 'selected' : ''">Fetch
+            API</a>
+        </li>
+        <li>
+          <a @click="currentExercise = 'todo-list'" :class="currentExercise === 'todo-list' ? 'selected' : ''">ToDo
+            List</a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- SEARCH FILTER START -->
+    <div class="search-filter" x-data="{
+        searchFilter: '',
+        fruits: ['STRAWBERRY', 'BANANA', 'APPLE', 'BLUEBERRY', 'ORANGE', 'GRAPE', 'WATERMELON', 'MELON', 'LEMON', 'PAPAYA', 'PINAPPLE', 'COCONUT', 'PEAR', 'PEACH'],
+        get filteredFruits() {
+          return this.fruits.filter((fruit) => fruit.includes(this.searchFilter.toUpperCase()));
+        }
+      }" x-show="currentExercise === 'search-filter'">
+      <h1>SEARCH FILTER</h1>
+      <input x-model="searchFilter" placeholder="FRUIT" />
+      <ul>
+        <template x-for="fruit in filteredFruits" :key="fruit">
+          <li x-text="fruit"></li>
+        </template>
+      </ul>
+    </div>
+
+    <!-- COUNTER START -->
+    <div class="counter" x-data="{ count: 0, power: 1 }" x-show="currentExercise === 'counter'">
+      <h1>COUNTER</h1>
+      <h2 x-text="`COUNT: ${count}`"></h2>
+      <div>
+        <button @click="count += power" type="button">INCREMENT</button>
+        <button @click="count -= power" type="button">DECREMENT</button>
+      </div>
+      <div class="power">
+        <label for="power">POWER</label>
+        <input x-model.number="power" id="power" type="range" min="1" max="100" />
+        <span x-text="power"></span>
+      </div>
+      <button @click="count = 0; power = 1" type="button">RESET</button>
+    </div>
+
+    <!-- SIGNUP START -->
+    <div class="signup"
+      x-data="{ firstname: '', lastname: '', birthdate: new Date(), phone: '', email: '', password: '', showPassword: false }"
+      x-show="currentExercise === 'signup'">
+      <h1>SIGN UP</h1>
+      <form @submit.prevent="
+        alert(`Account created successfully.
+        Account Info:
+        First Name: ${firstname}
+        Last Name: ${lastname}
+        Birthday: ${birthdate}
+        Phone: ${phone}
+        E-mail: ${email}
+        Password: ${password}`);
+
+        firstname = '';
+        lastname = '';
+        birthdate =  new Date();
+        phone = '';
+        email = '';
+        password = '';
+      ">
+        <div>
+          <label for="firstname">First Name</label>
+          <input x-model="firstname" id="firstname" type="text" placeholder="John" required />
+        </div>
+        <div>
+          <label for="lastname">Last Name</label>
+          <input x-model="lastname" id="lastname" type="text" placeholder="Doe" required />
+        </div>
+        <div>
+          <label for="birthdate">Birthday</label>
+          <input x-model="birthdate" id="birthdate" type="date" required />
+        </div>
+        <div>
+          <label for="phone">Phone</label>
+          <input x-model="phone" id="phone" type="text" placeholder="+11 22 9 3456-7890" />
+        </div>
+        <div>
+          <label for="email">E-mail</label>
+          <input x-model="email" id="email" type="email" placeholder="johndoe@email.com" required />
+        </div>
+        <div>
+          <label for="password">Password</label>
+          <input x-model="password" class="last-input" id="password" :type="showPassword ? 'text' : 'password'"
+            placeholder="*********" required />
+          <button @click="showPassword = !showPassword" x-text="showPassword ? 'Hide' : 'Show'" type="button"></button>
+        </div>
+        <button type="submit">Create Account</button>
+      </form>
+    </div>
+
+    <!-- FETCH API START -->
+    <div class="fetch-api" x-data="{
+        loading: true,
+        imageUrl: '',
+        async fetchDogImage() {
+          this.loading = true;
+
+          const response = await fetch('https://dog.ceo/api/breeds/image/random');
+          const data = await response.json();
+
+          this.imageUrl = data.message;
+          this.loading = false;
+        },
+      }" x-show="currentExercise === 'fetch-api'" x-init="fetchDogImage()">
+      <h1>FETCH API</h1>
+      <button @click="fetchDogImage()" type="button">FETCH ANOTHER DOG</button>
+      <div x-show="loading">LOADING...</div>
+      <img x-show="!loading" :src="imageUrl" alt="Dog" />
+    </div>
+
+    <!-- TODO LIST START -->
+    <div class="todo-list" x-data="{
+        todos: [{ title: 'STUDY', done: false }, { title: 'EXERCISE', done: false }, { title: 'MEDITATE', done: true }, { title: 'READ', done: true }, { title: 'STRETCH', done: true }],
+        todoTitle: '',
+        isUpdate: false,
+        updateIndex: null,
+      }" x-show="currentExercise === 'todo-list'">
+      <h1>TODO LIST</h1>
+      <form @submit.prevent="
+        if (isUpdate) {
+          todos[updateIndex].title = todoTitle.toUpperCase();
+          isUpdate = false;
+        } else {
+          todos.push({ title: todoTitle.toUpperCase(), done: false });
+        }
+        
+        todoTitle = '';
+        ">
+        <input x-model="todoTitle" type="text" placeholder="NEW TODO" required />
+        <button x-text="isUpdate ? 'UPDATE' : 'CREATE'" type="submit"></button>
+      </form>
+      <ul>
+        <template x-for="(todo, index) in todos" :key="index">
+          <div class="crud-wrapper">
+            <li>
+              <label>
+                <input @change="todos[index].done = !todos[index].done;" type="checkbox" :checked="todo.done">
+                <span x-text="todo.title" :class="todo.done ? 'done' : ''"></span>
+              </label>
+            </li>
+            <button @click="todoTitle = todo.title; isUpdate = true; updateIndex = index;" class="crud-button"
+              type="button">U</button>
+            <button @click="todos = todos.filter((t, i) => i !== index)" class="crud-button" type="button">X</button>
+          </div>
+        </template>
+      </ul>
+    </div>
+    <footer>
+      <a href="https://github.com/renatozr">GitHub</a>
+      <a href="https://www.linkedin.com/in/renatozr11/">LinkedIn</a>
+    </footer>
+  </div>
+</body>
+
+</html>
