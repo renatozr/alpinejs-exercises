@@ -456,7 +456,7 @@
           todos[updateIndex].title = todoTitle.toUpperCase();
           isUpdate = false;
         } else {
-          todos.push({ title: todoTitle.toUpperCase(), done: false });
+          todos.unshift({ title: todoTitle.toUpperCase(), done: false });
         }
         
         todoTitle = '';
@@ -481,8 +481,8 @@
       </ul>
     </div>
     <footer>
-      <a href="https://github.com/renatozr">GitHub</a>
-      <a href="https://www.linkedin.com/in/renatozr11/">LinkedIn</a>
+      <a href="https://github.com/renatozr" target="_blank">GitHub</a>
+      <a href="https://www.linkedin.com/in/renatozr11/" target="_blank">LinkedIn</a>
     </footer>
   </div>
 </body>
